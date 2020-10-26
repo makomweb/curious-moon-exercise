@@ -1,5 +1,6 @@
-drop table if exists master_plan;
-create table master_plan(
+create schema if not exists import;
+drop table if exists import.master_plan;
+create table import.master_plan(
     start_time_utc text,
     duration text,
     date text,
@@ -11,5 +12,5 @@ create table master_plan(
     title text,
     description text
 );
-COPY master_plan(date, team, target, title, description)
+COPY import.master_plan(date, team, target, title, description)
 FROM '/home/data/master_plan.csv' WITH DELIMITER ',' HEADER CSV;
