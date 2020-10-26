@@ -1,7 +1,8 @@
 DB=enceladus
-CREATE_TABLE=${CURDIR}/create_table.sql
 BUILD=${CURDIR}/build.sql
-CSV='${CURDIR}/master_plan.csv'
+SCRIPTS=${CURDIR}/scripts
+CSV='${CURDIR}/data/master_plan.csv'
+CREATE_TABLE=$(SCRIPTS)/create_table.sql
 
 all: prepare
 	psql -U postgres -d $(DB) -f $(BUILD)
