@@ -14,5 +14,8 @@ prepare:
 events:
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_events_table.sql
 
+teams:
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_teams_table.sql
+	
 clean:
 	@rm -rf $(BUILD)
