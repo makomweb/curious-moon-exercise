@@ -5,14 +5,12 @@ CSV='${CURDIR}/data/master_plan.csv'
 CREATE_TABLE=$(SCRIPTS)/create_table.sql
 
 all: prepare
-	psql -U postgres -d $(DB) -f $(BUILD)
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
 
 prepare:
 	@cat $(CREATE_TABLE) >> $(BUILD)
 	@echo "COPY import.master_plan FROM $(CSV) WITH DELIMITER ',' HEADER CSV;" >> $(BUILD)
-
-normalize:
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
+	psql -U postgres -d $(DB) -f $(BUILD)
 
 clean:
 	@rm -rf $(BUILD)
