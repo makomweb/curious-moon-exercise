@@ -40,3 +40,7 @@ docker exec -it my-postgres bash
 `sudo apt-get update -y` to update the catalogs.
 
 `sudo apt-get intall -y make` to install _make_.
+
+## Get the Cassini RAW data
+
+Download the raw data from [archive.redfour.io/cassini/cassini_data.zip](archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file.
