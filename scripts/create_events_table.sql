@@ -11,7 +11,7 @@ create table events(
     request_id int
 );
 insert into events(time_stamp, title, description)
-select import.master_plan.date::timestamptz,
+select import.master_plan.start_time_utc::timestamptz at time zone 'UTC',
     import.master_plan.title,
     import.master_plan.description
 from import.master_plan;
