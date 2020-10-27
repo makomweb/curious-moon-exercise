@@ -11,7 +11,7 @@ prepare:
 	@cat $(CREATE_TABLE) >> $(BUILD)
 	@echo "COPY import.master_plan(date, team, target, title, description) FROM $(CSV) WITH DELIMITER ',' HEADER CSV;" >> $(BUILD)
 
-events_table:
+events:
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_events_table.sql
 
 clean:

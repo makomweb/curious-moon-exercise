@@ -1,3 +1,4 @@
+drop table if exists events;
 create table events(
     id serial primary key,
     time_stamp timestamptz not null,
@@ -9,3 +10,8 @@ create table events(
     team_id int,
     request_id int
 );
+insert into events(time_stamp, title, description)
+select import.master_plan.date,
+    import.master_plan.title,
+    import.master_plan.description
+from import.master_plan;
