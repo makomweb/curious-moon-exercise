@@ -10,7 +10,11 @@ create table events(
     team_id int,
     request_id int
 );
-insert into events(time_stamp, title, description)
+insert into events(
+        time_stamp,
+        title,
+        description
+    )
 select import.master_plan.start_time_utc::timestamptz at time zone 'UTC',
     import.master_plan.title,
     import.master_plan.description
