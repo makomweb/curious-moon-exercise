@@ -34,3 +34,9 @@ docker run --volume //c/Users/marti/Data:/home/data -d -p 5432:5432 --name my-po
 ```
 docker exec -it my-postgres bash
 ```
+
+## Install make
+
+`sudo apt-get update -y` to update the catalogs.
+
+`sudo apt-get intall -y make` to install _make_.
