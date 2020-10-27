@@ -1,35 +1,35 @@
 -- TEAMS
-drop table if exists teams;
+drop table if exists teams cascade;
 select distinct(team) as description into teams
 from import.master_plan;
 alter table teams
 add id serial primary key;
 -- SPASS TYPES
-drop table if exists spass_types;
+drop table if exists spass_types cascade;
 select distinct(spass_type) as description into spass_types
 from import.master_plan;
 alter table spass_types
 add id serial primary key;
 -- TARGET
-drop table if exists targets;
+drop table if exists targets cascade;
 select distinct(target) as description into targets
 from import.master_plan;
 alter table targets
 add id serial primary key;
 -- EVENT TYPES
-drop table if exists event_types;
+drop table if exists event_types cascade;
 select distinct(library_definition) as description into event_types
 from import.master_plan;
 alter table event_types
 add id serial primary key;
 --REQUESTS
-drop table if exists requests;
+drop table if exists requests cascade;
 select distinct(request_name) as description into requests
 from import.master_plan;
 alter table requests
 add id serial primary key;
 -- EVENTS
-drop table if exists events;
+drop table if exists events cascade;
 create table events(
     id serial primary key,
     time_stamp timestamptz not null,
@@ -60,8 +60,8 @@ select import.master_plan.start_time_utc::timestamp,
     requests.id as request_id,
     spass_types.id as spass_type_id
 from import.master_plan
-    inner join event_types on event_types.description = import.master_plan.library_definition
-    inner join targets on targets.description = import.master_plan.target
-    inner join teams on teams.description = import.master_plan.team
-    inner join requests on requests.description = import.master_plan.request_name
-    inner join spass_types on spass_types.description = import.master_plan.spass_type;
+    left join event_types on event_types.description = import.master_plan.library_definition
+    left join targets on targets.description = import.master_plan.target
+    left join teams on teams.description = import.master_plan.team
+    left join requests on requests.description = import.master_plan.request_name
+    left join spass_types on spass_types.description = import.master_plan.spass_type;
