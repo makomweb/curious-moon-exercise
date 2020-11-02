@@ -1,5 +1,4 @@
-select time_stamp,
-    title
-from events
-where time_stamp::date = '2009-11-02'
-order by time_stamp;
+select date_part('year', date),
+    to_char(time_stamp, 'DDD')
+from enceladus_events
+where event like '%closest%';
