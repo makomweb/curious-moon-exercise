@@ -1,4 +1,5 @@
-drop view if exists enceladus_events;
+drop index if exists idx_event_search;
+drop materialized view if exists enceladus_events;
 create materialized view enceladus_events as
 select events.id,
     events.title,
