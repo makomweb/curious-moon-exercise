@@ -1,11 +1,11 @@
 drop view if exists enceladus_events;
-create view enceladus_events as
+create materialized view enceladus_events as
 select events.id,
     events.title,
     events.description,
-    events.time_stamp,
-    events.time_stamp::date as date,
     event_types.description as event,
+    events.time_stamp::date as date,
+    events.time_stamp,
     to_tsvector(
         concat(events.description, ' ', events.title)
     ) as search
