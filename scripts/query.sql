@@ -4,4 +4,5 @@ from events
     inner join teams on teams.id = team_id
 where time_stamp::date = '2005-03-09'
     and target_id = 28
-group by teams.description;
+group by teams.description
+order by activity desc;
