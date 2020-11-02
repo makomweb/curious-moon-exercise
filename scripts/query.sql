@@ -1,5 +1,6 @@
--- find the thermal results
-select id, date, title
-from enceladus_events
-where date between '2005-02-01'::date and '2005-02-28'::date
-and search @@ to_tsquery('thermal');
+select count(1) as activity,
+    teams.description
+from events
+    inner join teams on teams.id = team_id
+where time_stamp::date = '2005-03-09'
+    and target_id = 28;
