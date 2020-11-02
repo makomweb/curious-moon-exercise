@@ -1,7 +1,9 @@
---creating a view
 drop view if exists enceladus_events;
 create view enceladus_events as
-select events.time_stamp,
+select events.id,
+    events.title,
+    events.description,
+    events.time_stamp,
     events.time_stamp::date as date,
     event_types.description as event
 from events
