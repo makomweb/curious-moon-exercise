@@ -6,6 +6,7 @@ CREATE_TABLE=$(SCRIPTS)/create_table.sql
 
 all: prepare
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/view.sql
 
 prepare:
 	@cat $(CREATE_TABLE) >> $(BUILD)
