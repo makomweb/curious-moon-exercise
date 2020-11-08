@@ -1,4 +1,1 @@
-select date_part('year', date),
-    to_char(time_stamp, 'DDD')
-from enceladus_events
-where event like '%closest%';
+select 19000 /(pi() * 313) as orbits_per_hour;

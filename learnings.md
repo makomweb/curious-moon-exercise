@@ -62,4 +62,14 @@ where title ilike '%flyby%'
 or title ilike '%fly by%';
 ```
 
-##
+## Run a query from the scripts subfolder
+
+Open Powershell.
+
+Execute a shell on the Postgres Docker Container:
+
+`docker exec -it my-postgres bash`
+
+Use PSQL to run the SQL scripts:
+
+`psql -U postgres -d enceladus -f ./scripts/query.sql`
