@@ -20,19 +20,19 @@ The advantage is that I can use VSCode and the Git tools I am familiar with - wi
 ## Starting the Docker container
 
 ```
-$ docker run -d -p 5432:5432 --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
+$ docker run -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
 ```
 
 with the mounted shared folder
 
 ```
-docker run --volume //c/Users/marti/Data:/home/data -d -p 5432:5432 --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
+docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
 ```
 
 ## Starting a Bash on the Docker container
 
 ```
-docker exec -it my-postgres bash
+docker exec -it curious-moon-postgres bash
 ```
 
 ## Install make
@@ -44,3 +44,19 @@ docker exec -it my-postgres bash
 ## Get the Cassini RAW data
 
 Download the raw data from [archive.redfour.io/cassini/cassini_data.zip](archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file.
+
+## Use PGAdmin to connect to the database
+
+Make a new server connection `localhost` with port `5432` and username `postgres` and password `mysecretpassword`.
+
+Name the connection `Curious-Moon-Enceladus`.
+
+## Create a Database using PSQL
+
+Open a Bash on the docker container.
+
+Run `psql -U postgres`.
+
+Run `create database enceladus;`.
+
+Type `\q` to exit PSQL.
