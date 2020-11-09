@@ -1,1 +1,0 @@
-select 19000 /(pi() * 313) as orbits_per_hour;
