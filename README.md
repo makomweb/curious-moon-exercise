@@ -19,21 +19,15 @@ The advantage is that I can use VSCode and the Git tools I am familiar with - wi
 
 ## Starting the Docker container
 
-```
-$ docker run -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
-```
+`$ docker run -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
-with the mounted shared folder
+Prefer the command with the mounted shared folder:
 
-```
-docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres
-```
+`docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
 ## Starting a Bash on the Docker container
 
-```
-docker exec -it curious-moon-postgres bash
-```
+`docker exec -it curious-moon-postgres bash`
 
 ## Install make
 
@@ -59,4 +53,4 @@ Run `psql -U postgres`.
 
 Run `create database enceladus;`.
 
-Type `\q` to exit PSQL.
+Type `\q` to exit PSQL shell

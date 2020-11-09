@@ -68,7 +68,7 @@ Open Powershell.
 
 Execute a shell on the Postgres Docker Container:
 
-`docker exec -it my-postgres bash`
+`docker exec -it curious-moon-postgres bas`
 
 Use PSQL to run the SQL scripts:
 
