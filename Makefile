@@ -15,7 +15,7 @@ function:
 	@echo "Creating low time function ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/low_time_function.sql
 
-flyby: imns
+flyby_view: imns
 	@echo "Create flyby view ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_flyby_altitudes_view.sql
 
