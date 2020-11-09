@@ -3,7 +3,11 @@ create schema cda;
 select event_id::integer as id,
     impact_event_time::timestamp as time_stamp,
     impact_event_time::date as impact_date,
-    counter_number::integer,
+    case
+        counter_number
+        when '**' then null
+        else counter_number::integer
+    end as counter,
     spacecraft_sun_distance::numeric(6, 4) as sun_distance_au,
     spacecraft_saturn_distance::numeric(8, 2) as saturn_distance_rads,
     spacecraft_x_velocity::numeric(6, 2) as x_velocity,
