@@ -11,6 +11,10 @@ CREATE_MASTER_PLAN_TABLE=$(SCRIPTS)/create_table_master_plan.sql
 CREATE_IMNS_TABLE=$(SCRIPTS)/create_table_inms.sql
 CREATE_CDA_TABLE=$(SCRIPTS)/create_table_cda.sql
 
+normalize_cda: create_table_cda
+	@echo "Normalizing cda data ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize_cda.sql
+
 create_table_cda: 
 	@echo "Creating table for CDA ..."
 	@cat $(CREATE_CDA_TABLE) >> $(BUILD)
