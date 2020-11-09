@@ -17,6 +17,7 @@ inms:
 	@echo "COPY import.inms FROM $(INMS_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	@echo "DELETE FROM import.inms WHERE sclk IS NULL or sclk = 'sclk';" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_flyby_altitudes_view.sql
 
 prepare:
 	@echo "Running prepare ... "
