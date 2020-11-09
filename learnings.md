@@ -73,3 +73,54 @@ Execute a shell on the Postgres Docker Container:
 Use PSQL to run the SQL scripts:
 
 `psql -U postgres -d enceladus -f ./scripts/query.sql`
+
+## Select lowest altitudes per flyby
+
+~~~
+select
+date_part('year',time_stamp) as year,
+min(altitude) as nadir
+from flyby_altitudes
+group by year order by year;
+~~~
+
+(Comment to Rob: the group by clause can be simplified)
+
+~~~
+select
+  date_part('year',time_stamp) as year,
+  date_part('month',time_stamp) as month,
+  min(altitude) as nadir
+from flyby_altitudes
+group by
+  date_part('year',time_stamp),
+  date_part('month',time_stamp);
+~~~
+
+can be simplified
+
+~~~
+select
+date_part('year',time_stamp) as year,
+date_part('month',time_stamp) as month,
+min(altitude) as nadir
+from flyby_altitudes
+group by year, month;
+~~~
+
+~~~
+select time_stamp::date as date,
+min(altitude) as nadir
+from flyby_altitudes
+group by date order by date;
+~~~
+
+~~~
+select
+date_part('year',time_stamp) as year,
+date_part('week',time_stamp) as week,
+min(altitude) as altitude
+from flyby_altitudes
+group by
+year, week;
+~~~
