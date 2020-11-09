@@ -7,23 +7,27 @@ CREATE_TABLE=$(SCRIPTS)/create_table.sql
 CREATE_IMNS_TABLE=$(SCRIPTS)/create_inms_table.sql
 
 all: prepare
-	@echo "Running all ... "
+	@echo "Running all ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/view.sql
 
+function:
+	@echo "Creating low time function ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/low_time_function.sql
+
 flyby: imns
-	@echo "Create flyby view ... "
+	@echo "Create flyby view ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_flyby_altitudes_view.sql
 
 inms:
-	@echo "Running imns ... "
+	@echo "Running imns ..."
 	@cat $(CREATE_IMNS_TABLE) >> $(BUILD)
 	@echo "COPY import.inms FROM $(INMS_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	@echo "DELETE FROM import.inms WHERE sclk IS NULL or sclk = 'sclk';" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
 
 prepare:
-	@echo "Running prepare ... "
+	@echo "Running prepare ..."
 	@cat $(CREATE_TABLE) >> $(BUILD)
 	@echo "COPY import.master_plan FROM $(CSV) WITH DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
