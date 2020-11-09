@@ -11,6 +11,10 @@ all: prepare
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/view.sql
 
+flybys: function
+	@echo "Creating flybys table ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_flybys_table.sql
+
 function:
 	@echo "Creating low time function ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/low_time_function.sql
