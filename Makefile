@@ -10,17 +10,11 @@ CREATE_TABLE=$(SCRIPTS)/create_table.sql
 CREATE_IMNS_TABLE=$(SCRIPTS)/create_inms_table.sql
 CREATE_CDA_TABLE=$(SCRIPTS)/create_cda_table.sql
 
-all: prepare
-	@echo "Running all ..."
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/view.sql
-
 cda: 
 	@echo "Creating CDA table ..."
 	@cat $(CREATE_CDA_TABLE) >> $(BUILD)
 	@echo "COPY import.cda FROM $(CDA_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
-
 
 flybys: function
 	@echo "Creating flybys table ..."
@@ -40,6 +34,11 @@ inms:
 	@echo "COPY import.inms FROM $(INMS_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	@echo "DELETE FROM import.inms WHERE sclk IS NULL or sclk = 'sclk';" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
+
+all: prepare
+	@echo "Running all ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/normalize.sql
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/view.sql
 
 prepare:
 	@echo "Running prepare ..."
