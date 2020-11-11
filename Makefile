@@ -6,10 +6,18 @@ SCRIPTS=${CURDIR}/scripts
 CSV='${CURDIR}/data/master_plan.csv'
 INMS_CSV='${CURDIR}/data/inms.csv'
 CDA_CSV='${CURDIR}/data/cda.csv'
+JPL_FLYBYS_CSV='${CURDIR}/data/jpl_flybys.csv'
 
 CREATE_MASTER_PLAN_TABLE=$(SCRIPTS)/create_table_master_plan.sql
 CREATE_IMNS_TABLE=$(SCRIPTS)/create_table_inms.sql
 CREATE_CDA_TABLE=$(SCRIPTS)/create_table_cda.sql
+CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
+
+create_table_jpl_flybys:
+	@echo "Creating table for JPL flybys ..."
+	@cat $(CREATE_TABLE_JPL_FLYBYS) >> $(BUILD)
+	@echo "COPY flybys FROM $(JPL_FLYBYS_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
+	psql -U postgres -d $(DB) -f $(BUILD)
 
 create_function_pythag:
 	@echo "Creating function for Phythagoras ..."
