@@ -334,3 +334,12 @@ from flyby_altitudes
 inner join flybys on flybys.time_stamp::date = flyby_altitudes.time_stamp::date
 and flybys.target_altitude = flyby_altitudes.altitude
 ```
+
+### Select altitutes for a given day if it is in a certain range
+
+```
+select * from flyby_altitudes
+where time_stamp::date = '2005-02-17'
+and altitude between 1200 and 1500
+order by time_stamp;
+```
