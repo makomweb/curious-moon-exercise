@@ -297,3 +297,40 @@ order by year, month
 )
 select * from rollup;
 ```
+
+### Caculate C
+
+```
+select id, altitude,
+(altitude + 252) as total_altitude, --b
+((altitude + 252) / sind(73)) - 252 as target_altitude -- c
+from flybys;
+```
+
+### Update flybys table with target_altitude
+
+```
+update flybys
+set target_altitude=(
+(altitude + 252) / sind(73)
+) - 252;
+```
+
+### Update flybys table with transit_distance 
+
+```
+update flybys
+set
+transit_distance = (
+(target_altitude + 252) * sind(17) * 2
+);
+```
+
+### Query flyby_altitudes
+
+```
+select min(flyby_altitudes.time_stamp)
+from flyby_altitudes
+inner join flybys on flybys.time_stamp::date = flyby_altitudes.time_stamp::date
+and flybys.target_altitude = flyby_altitudes.altitude
+```
