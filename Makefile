@@ -21,6 +21,7 @@ all: flip_tables_roflmao
 create_table_inms_readings: 
 	@echo "Creating table for INMS readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_inms_readings.sql
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_inms_readings.sql
 
 import_chem_data:
 	@echo "Creating table for chemical data ..."
