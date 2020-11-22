@@ -14,7 +14,7 @@ CREATE_CDA_TABLE=$(SCRIPTS)/create_table_cda.sql
 CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
 CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 
-all: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
+all: flip_tables_roflmao
 
 flip_tables_roflmao: create_table_flybys_fixed
 	@echo "Flipping tables ..."
@@ -40,9 +40,11 @@ create_view_mins: create_table_altitude_times
 	@echo "Creating mins view ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_view_mins.sql
 
-create_table_altitude_times:
+create_table_altitude_times: prepare
 	@echo "Creating table for altitude times ..."
 	psql -U postgres -d $(DB) -f $(CREATE_TABLE_TIME_ALTITUDES)
+
+prepare: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
 
 create_table_jpl_flybys:
 	@echo "Creating table for JPL flybys ..."
