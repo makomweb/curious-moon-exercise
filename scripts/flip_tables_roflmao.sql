@@ -11,3 +11,10 @@ drop table time_altitudes cascade;
 -- rename flybys_2
 alter table flybys_2
 rename to flybys;
+-- add a targeted field
+alter table flybys
+add targeted boolean not null default false;
+-- set it
+update flybys
+set targeted = true
+where id in (3, 5, 7, 17, 18, 21);
