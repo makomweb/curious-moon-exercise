@@ -13,6 +13,8 @@ CREATE_IMNS_TABLE=$(SCRIPTS)/create_table_inms.sql
 CREATE_CDA_TABLE=$(SCRIPTS)/create_table_cda.sql
 CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
 
+all: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
+
 create_table_jpl_flybys:
 	@echo "Creating table for JPL flybys ..."
 	@cat $(CREATE_TABLE_JPL_FLYBYS) >> $(BUILD)
