@@ -18,6 +18,10 @@ CREATE_TABLE_CHEM_DATA=$(SCRIPTS)/create_table_chem_data.sql
 
 all: flip_tables_roflmao
 
+create_table_inms_readings: 
+	@echo "Creating table for INMS readings ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_inms_readings.sql
+
 import_chem_data:
 	@echo "Creating table for chemical data ..."
 	@cat $(CREATE_TABLE_CHEM_DATA) >> $(BUILD)
