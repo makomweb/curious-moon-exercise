@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    database:
+        image: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: mysecretpassword
+            POSTGRES_DB: enceladus
+        ports:
+          - "5432:5432"
+        volumes:
+          - //c/Workspace/curious-moon-exercise:/home/curious
