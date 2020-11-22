@@ -20,9 +20,9 @@ select_mins: create_mins_view
 	@echo "Select mins year week nadir ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/select_mins_week_year_nadir.sql
 
-create_mins_view:
+create_view_mins:
 	@echo "Creating mins view ..."
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_mins_view.sql
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_view_mins.sql
 
 create_table_altitude_times:
 	@echo "Creating table for altitude times ..."

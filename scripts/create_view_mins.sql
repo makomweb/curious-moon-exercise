@@ -1,5 +1,5 @@
-drop materialized view if exists mins_view cascade;
-create materialized view mins_view as
+drop materialized view if exists mins cascade;
+create materialized view mins as
 select min(altitude) as nadir,
     year,
     week
