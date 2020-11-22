@@ -12,8 +12,13 @@ CREATE_MASTER_PLAN_TABLE=$(SCRIPTS)/create_table_master_plan.sql
 CREATE_IMNS_TABLE=$(SCRIPTS)/create_table_inms.sql
 CREATE_CDA_TABLE=$(SCRIPTS)/create_table_cda.sql
 CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
+CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 
 all: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
+
+create_table_altitude_times:
+	@echo "Creating table for altitude times ..."
+	psql -U postgres -d $(DB) -f $(CREATE_TABLE_TIME_ALTITUDES)
 
 create_table_jpl_flybys:
 	@echo "Creating table for JPL flybys ..."
