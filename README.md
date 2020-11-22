@@ -7,33 +7,48 @@ A Curious Moon by Rob Conery.
 - Website: [https://bigmachine.io/products/a-curious-moon/](https://bigmachine.io/products/a-curious-moon/)
 - Github: [https://github.com/red-4/curious-moon](https://github.com/red-4/curious-moon)
 
-## Preparation
+## Docker preparation
 
 I have used Docker for Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/).
 
-And used the Postgres Docker image from here: [https://hub.docker.com/_/postgres](https://hub.docker.com/_/postgres)
+### Using Docker Compose ...
+
+To work with the docker image I have created a *docker-compose.yaml* file. 
+Visiting this file you notice that the container port `5432` is mounted to the default Postgres port `5432`.
+You also notice the credentials how to access the database - e.g. with [pgAdmin](https://www.pgadmin.org/).
+This configuration file also mounts a directory `c:\Workspace\curious-moon-exercise` into the container.
+This way it easier to edit files using the familiar editing tools - e.g. Visual Studio Code and Git.
+Feel free to adjust the configuration to your needs.
+
+Run `docker-compose up -d` to start the container in the background. 
+
+### ... or run Docker manually
+
+Pull the [Postgres Docker image](https://hub.docker.com/_/postgres).
 
 I decided to use a shared folder (between the Windows Host and the Docker Container) to store the implementation files.
 
+`docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
+
 The advantage is that I can use VSCode and the Git tools I am familiar with - without additional installation steps.
 
-## Starting the Docker container
+If you want to run the Docker container without the mounted folder you can use the following command:
 
-`$ docker run -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres`
-
-Prefer the command with the mounted shared folder:
-
-`docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-postgres -e POSTGRES_PASSWORD=mysecretpassword postgres`
+`docker run -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
 ## Starting a Bash on the Docker container
 
-`docker exec -it curious-moon-postgres bash`
+Once the Postgres database is running you can start with the exercise.
 
-## Install make
+`docker exec -it curious-moon-exercise_database_1 bash` opens a Bash on the container. Make sure you use the correct container name here.
 
-`sudo apt-get update -y` to update the catalogs.
+## Install make on the container
 
-`sudo apt-get intall -y make` to install _make_.
+We will need make to do the exercise. (Note to myself: think about creating a Docker image which combines the Postgres image with a Make installation.)
+
+`apt-get update -y` to update the APT catalogs.
+
+`apt-get install -y make` to install _make_.
 
 ## Get the Cassini RAW data
 
@@ -49,8 +64,8 @@ Name the connection `Curious-Moon-Enceladus`.
 
 Open a Bash on the docker container.
 
-Run `psql -U postgres`.
+`psql -U postgres` to open the Postgres shell (PSQL) for the user `postgres`.
 
-Run `create database enceladus;`.
+`create database enceladus;` to create a database if it is not there yet (e.g. if it was dropped before)
 
-Type `\q` to exit PSQL shell
+Type `\q` to exit Postgres shell (PSQL).
