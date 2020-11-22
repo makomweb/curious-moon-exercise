@@ -16,6 +16,14 @@ CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 
 all: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
 
+select_flybys_fixed: create_view_min_times
+	@echo "Selecting flybys (fixed) ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/select_flybys_fixed.sql
+
+create_view_min_times: create_view_mins
+	@echo "Creating view min times ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_view_min_times.sql
+
 select_mins: create_mins_view
 	@echo "Select mins year week nadir ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/select_mins_week_year_nadir.sql
