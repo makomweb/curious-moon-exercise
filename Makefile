@@ -16,6 +16,10 @@ CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 
 all: create_view_enceladus_events create_view_flyby_altitudes create_table_flybys normalize_cda create_function_pythag create_table_jpl_flybys
 
+flip_tables_roflmao: create_table_flybys_fixed
+	@echo "Flipping tables ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/flip_tables_roflmao.sql
+	
 create_table_flybys_fixed: create_view_min_times
 	@echo "Creating table for flybys (fixed) ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flybys_fixed.sql
@@ -32,7 +36,7 @@ select_mins: create_mins_view
 	@echo "Select mins year week nadir ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/select_mins_week_year_nadir.sql
 
-create_view_mins:
+create_view_mins: create_table_altitude_times
 	@echo "Creating mins view ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_view_mins.sql
 
