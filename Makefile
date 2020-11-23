@@ -16,6 +16,10 @@ CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
 CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 CREATE_TABLE_CHEM_DATA=$(SCRIPTS)/create_table_chem_data.sql
 
+prepare_table_for_time_ranges:
+	@echo "Preparing table 'flybys' for ranges ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_flybys.sql
+
 create_table_flyby_readings: 
 	@echo "Creating table flyby readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flyby_readings.sql
