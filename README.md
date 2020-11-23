@@ -1,8 +1,10 @@
-# A Curious Moon by Rob Conery
+# My notes about: A Curious Moon by Rob Conery
 
-This repository contains the implementation I did while reading the book
+This repository contains the implementation I did while reading the book -- every SQL query as well as a description **how to setup everything on Windows 10 using Docker**.
 
-A Curious Moon by Rob Conery. 
+A Curious Moon by Rob Conery.
+
+![cover](./images/cover.png)
 
 - Website: [https://bigmachine.io/products/a-curious-moon/](https://bigmachine.io/products/a-curious-moon/)
 - Github: [https://github.com/red-4/curious-moon](https://github.com/red-4/curious-moon)
@@ -69,3 +71,15 @@ Open a Bash on the docker container.
 `create database enceladus;` to create a database if it is not there yet (e.g. if it was dropped before)
 
 Type `\q` to exit Postgres shell (PSQL).
+
+## Images
+
+I really liked Dee's drawings to make things clearer - that's why I drew them myself.
+
+### Cosmic dust analyzer (CDA)
+
+![cda](./images/cda.png)
+
+### Ion and Neutral Mass Spectrometer (INMS)
+
+![inms](./images/inms.png)
