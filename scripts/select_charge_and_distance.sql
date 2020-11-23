@@ -3,6 +3,5 @@ select name,
     time_stamp,
     inms.readings.altitude - nadir as distance
 from inms.readings
-    inner join flybys on time_stamp >= window_start
-    and time_stamp <= window_end
+    inner join flybys on analysis_window @> inms.readings.time_stamp
 where flybys.id = 4;
