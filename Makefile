@@ -16,13 +16,7 @@ CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
 CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 CREATE_TABLE_CHEM_DATA=$(SCRIPTS)/create_table_chem_data.sql
 
-prepare_table_for_time_ranges:
-	@echo "Preparing table 'flybys' for ranges ..."
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_flybys.sql
-
-create_table_flyby_readings: 
-	@echo "Creating table flyby readings ..."
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flyby_readings.sql
+part2: import_chem_data create_table_flyby_readings prepare_table_for_time_ranges create_index_inms_readings
 
 create_index_inms_readings: alter_table_inms_readings
 	@echo "Creating index for INMS readings ..."
@@ -36,13 +30,21 @@ create_table_inms_readings:
 	@echo "Creating table for INMS readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_inms_readings.sql
 
+prepare_table_for_time_ranges:
+	@echo "Preparing table 'flybys' for ranges ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_flybys.sql
+
+create_table_flyby_readings: 
+	@echo "Creating table flyby readings ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flyby_readings.sql
+
 import_chem_data:
 	@echo "Creating table for chemical data ..."
 	@cat $(CREATE_TABLE_CHEM_DATA) >> $(BUILD)
 	@echo "COPY chem_data FROM $(CHEM_DATA_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
 
-all: flip_tables_roflmao
+part1: flip_tables_roflmao
 
 flip_tables_roflmao: create_table_flybys_fixed
 	@echo "Flipping tables ..."
