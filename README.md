@@ -15,11 +15,11 @@ I have used Docker for Windows: [https://docs.docker.com/docker-for-windows/inst
 
 ### Using Docker Compose ...
 
-To work with the docker image I have created a *docker-compose.yaml* file. 
-Visiting this file you notice that the container port `5432` is mounted to the default Postgres port `5432`.
-You also notice the credentials how to access the database - e.g. with [pgAdmin](https://www.pgadmin.org/).
-This configuration file also mounts a directory `c:\Workspace\curious-moon-exercise` into the container.
-This way it easier to edit files using the familiar editing tools - e.g. Visual Studio Code and Git.
+To work with the Docker image I have created a *docker-compose.yaml* file. 
+Visiting this file you will notice that the container port `5432` is mounted to the default Postgres port `5432`.
+You will also notice the credentials how to access the database - e.g. with [pgAdmin](https://www.pgadmin.org/).
+The configuration file mounts a directory `c:\Workspace\curious-moon-exercise` into the container.
+This way you can edit files using the familiar editing tools - e.g. Visual Studio Code and Git.
 Feel free to adjust the configuration to your needs.
 
 Run `docker-compose up -d` to start the container in the background. 
@@ -32,7 +32,7 @@ I decided to use a shared folder (between the Windows Host and the Docker Contai
 
 `docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
-The advantage is that I can use VSCode and the Git tools I am familiar with - without additional installation steps.
+The advantage is that I can use VSCode and the Git tools I am familiar with - without additional installation steps - because they are already on my machine.
 
 If you want to run the Docker container without the mounted folder you can use the following command:
 
@@ -54,7 +54,7 @@ We will need make to do the exercise. (Note to myself: think about creating a Do
 
 ## Get the Cassini RAW data
 
-Download the raw data from [archive.redfour.io/cassini/cassini_data.zip](archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file. The other files `cda.csv`, `inms.csv`, `jpl_flybys.csv`, and `chem_data.csv` will also be necessary later.
+Download the raw data from [http://archive.redfour.io/cassini/cassini_data.zip](http://archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file. The other files `cda.csv`, `inms.csv`, `jpl_flybys.csv`, and `chem_data.csv` will also be necessary later.
 
 ## Use PGAdmin to connect to the database
 
