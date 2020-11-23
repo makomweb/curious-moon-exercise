@@ -343,3 +343,14 @@ where time_stamp::date = '2005-02-17'
 and altitude between 1200 and 1500
 order by time_stamp;
 ```
+
+### Fetch a row where the timestamp matches the time-range-window
+
+Precondition: a column `analysis_window` of type time-range exists.
+See Postgres `tsrange()` for details.
+
+~~~
+select name
+from flybys
+where analysis_window @> '2005-02-17 03:30:12.119'::timestamp;
+~~~~
