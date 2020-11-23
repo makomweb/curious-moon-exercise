@@ -24,11 +24,17 @@ create_table_flyby_readings:
 	@echo "Creating table flyby readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flyby_readings.sql
 
+create_index_inms_readings: alter_table_inms_readings
+	@echo "Creating index for INMS readings ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_index_inms_readings.sql
+
+alter_table_inms_readings: create_table_inms_readings
+	@echo "Alter table for INMS readings ..."
+	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_inms_readings.sql
+
 create_table_inms_readings: 
 	@echo "Creating table for INMS readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_inms_readings.sql
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/alter_table_inms_readings.sql
-	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_index_inms_readings.sql
 
 import_chem_data:
 	@echo "Creating table for chemical data ..."
