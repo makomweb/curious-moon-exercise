@@ -1,4 +1,4 @@
-drop table if exists inms.readings;
+drop table if exists inms.readings cascade;
 select sclk::timestamp as time_stamp,
     source::text,
     mass_table,
