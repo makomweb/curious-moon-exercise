@@ -1,4 +1,5 @@
 select inms.chem_data.name,
+    source,
     sum(high_counts) as high_counts,
     sum(low_counts) as low_counts
 from flybys
@@ -7,5 +8,5 @@ from flybys
     inner join inms.chem_data on peak = mass_per_charge
 where flybys.id = 4
 group by inms.chem_data.name,
-    flybys.speed
+    source
 order by high_counts desc;
