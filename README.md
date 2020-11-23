@@ -42,6 +42,8 @@ If you want to run the Docker container without the mounted folder you can use t
 
 Alternatively you can use the *Docker* image which combines **PostgreSQL 13.1** and **GNU Make 4.2.1**.
 
+[https://registry.hub.docker.com/r/makomweb/images/tags](https://registry.hub.docker.com/r/makomweb/images/tags)
+
 Replace the official *Postgres* image in your `docker-compose.yaml` file:
 
 ~~~yaml
