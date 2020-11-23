@@ -16,8 +16,6 @@ CREATE_TABLE_JPL_FLYBYS=$(SCRIPTS)/create_table_jpl_flybys.sql
 CREATE_TABLE_TIME_ALTITUDES=$(SCRIPTS)/create_table_time_altitudes.sql
 CREATE_TABLE_CHEM_DATA=$(SCRIPTS)/create_table_chem_data.sql
 
-all: flip_tables_roflmao
-
 create_table_flyby_readings: 
 	@echo "Creating table flyby readings ..."
 	psql -U postgres -d $(DB) -f $(SCRIPTS)/create_table_flyby_readings.sql
@@ -33,6 +31,8 @@ import_chem_data:
 	@cat $(CREATE_TABLE_CHEM_DATA) >> $(BUILD)
 	@echo "COPY chem_data FROM $(CHEM_DATA_CSV) DELIMITER ',' HEADER CSV;" >> $(BUILD)
 	psql -U postgres -d $(DB) -f $(BUILD)
+
+all: flip_tables_roflmao
 
 flip_tables_roflmao: create_table_flybys_fixed
 	@echo "Flipping tables ..."
