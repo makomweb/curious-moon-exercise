@@ -78,6 +78,8 @@ Download the raw data from [http://archive.redfour.io/cassini/cassini_data.zip](
 
 ## Use PGAdmin to connect to the database
 
+[Download pgAdmin](https://www.pgadmin.org/) and install it.
+
 Make a new server connection `localhost` with port `5432` and username `postgres` and password `mysecretpassword`.
 
 Name the connection `Curious-Moon-Enceladus`.
