@@ -354,3 +354,7 @@ select name
 from flybys
 where analysis_window @> '2005-02-17 03:30:12.119'::timestamp;
 ~~~~
+
+### Range types
+
+[Postgres: types of ranges](https://wiki.postgresql.org/images/7/73/Range-types-pgopen-2012.pdf)
