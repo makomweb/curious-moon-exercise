@@ -38,6 +38,20 @@ If you want to run the Docker container without the mounted folder you can use t
 
 `docker run -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
+### Alternative Docker image
+
+Alternatively you can use the Docker image
+which combines PostgreSQL 13.1 and GNU Make 4.2.1.
+
+Replace the official Postgres image in your `docker-compose.yaml` file:
+
+~~~yaml
+#image: postgres
+image: makomweb/images:postgres-13.1-with-make-4.2.1
+~~~
+
+After that run `docker-compose up -d` to download the image and start the container.
+
 ## Starting a Bash on the Docker container
 
 Once the Postgres database is running you can start with the exercise.
