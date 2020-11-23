@@ -1,4 +1,4 @@
-# List some or my SQL learnings
+# List some of my SQL learnings
 
 ## Joining the targets table with the events
 
