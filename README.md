@@ -54,7 +54,7 @@ We will need make to do the exercise. (Note to myself: think about creating a Do
 
 ## Get the Cassini RAW data
 
-Download the raw data from [archive.redfour.io/cassini/cassini_data.zip](archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file.
+Download the raw data from [archive.redfour.io/cassini/cassini_data.zip](archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file. The other files `cda.csv`, `inms.csv`, `jpl_flybys.csv`, and `chem_data.csv` will also be necessary later.
 
 ## Use PGAdmin to connect to the database
 
