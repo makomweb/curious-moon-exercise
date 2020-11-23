@@ -28,7 +28,7 @@ Run `docker-compose up -d` to start the container in the background.
 
 Pull the [Postgres Docker image](https://hub.docker.com/_/postgres).
 
-I decided to use a shared folder (between the Windows Host and the Docker Container) to store the implementation files.
+I decided to use a shared folder (between the Windows Host and the Docker container) to store the implementation files.
 
 `docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
@@ -38,12 +38,31 @@ If you want to run the Docker container without the mounted folder you can use t
 
 `docker run -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
+## Starting a Bash on the Docker container
+
+Once the Postgres database is running you can start with the exercise.
+
+`docker exec -it curious-moon-exercise_database_1 bash` opens a Bash on the container.
+Make sure you use the correct container name here.
+
+## Install Make on the container
+
+We will need *Make* to do the exercise.
+
+~~~
+Note: if you are running the alternative Docker image it is not necessary to install *Make* - it already comes with it preinstalled.
+~~~
+
+`apt-get update -y` to update the *APT* catalogs.
+
+`apt-get install -y make` to install _Make_.
+
+
 ### Alternative Docker image
 
-Alternatively you can use the Docker image
-which combines PostgreSQL 13.1 and GNU Make 4.2.1.
+Alternatively you can use the *Docker* image which combines **PostgreSQL 13.1** and **GNU Make 4.2.1**.
 
-Replace the official Postgres image in your `docker-compose.yaml` file:
+Replace the official *Postgres* image in your `docker-compose.yaml` file:
 
 ~~~yaml
 #image: postgres
@@ -51,20 +70,6 @@ image: makomweb/images:postgres-13.1-with-make-4.2.1
 ~~~
 
 After that run `docker-compose up -d` to download the image and start the container.
-
-## Starting a Bash on the Docker container
-
-Once the Postgres database is running you can start with the exercise.
-
-`docker exec -it curious-moon-exercise_database_1 bash` opens a Bash on the container. Make sure you use the correct container name here.
-
-## Install make on the container
-
-We will need make to do the exercise. (Note to myself: think about creating a Docker image which combines the Postgres image with a Make installation.)
-
-`apt-get update -y` to update the APT catalogs.
-
-`apt-get install -y make` to install _make_.
 
 ## Get the Cassini RAW data
 
@@ -78,7 +83,7 @@ Name the connection `Curious-Moon-Enceladus`.
 
 ## Create a Database using PSQL
 
-Open a Bash on the docker container.
+Open a *Bash* on the *Docker* container.
 
 `psql -U postgres` to open the Postgres shell (PSQL) for the user `postgres`.
 
