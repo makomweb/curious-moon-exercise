@@ -9,6 +9,18 @@ A Curious Moon by Rob Conery.
 - Website: [https://bigmachine.io/products/a-curious-moon/](https://bigmachine.io/products/a-curious-moon/)
 - Github: [https://github.com/red-4/curious-moon](https://github.com/red-4/curious-moon)
 
+## Quickstart
+
+1. `docker-compose up -d` to download the Docker images and start the containers
+2. `docker exec -it postgres bash` to open a Bash on the Postgres container
+3. `cd /home/curious` to browse the mounted directory with the make file and raw CSV data
+4. `make import_master_plan` to import the master plan data into the _enceladus_ database
+5. `localhost:5050` to open a pgAdmin window on the Docker host machine (your local machine)
+6. login with `user@example.com` and `123456` to login to the pgAdmin
+7. create a server connection to the Postgres server using `postgres:5432` and `user@example.com` with `mysecretpassword` to browse the _enceladus_ database
+
+---
+
 ## Docker preparation
 
 I have used Docker for Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/).
@@ -57,7 +69,7 @@ After that run `docker-compose up -d` to download the image and start the contai
 
 Once the Postgres database is running you can start with the exercise.
 
-`docker exec -it curious-moon-exercise_database_1 bash` opens a Bash on the container.
+`docker exec -it postgres bash` opens a _Bash_ on the container.
 Make sure you use the correct container name here.
 
 ### Install Make on the container
@@ -78,9 +90,11 @@ Download the raw data from [http://archive.redfour.io/cassini/cassini_data.zip](
 
 ## Use PGAdmin to connect to the database
 
-[Download pgAdmin](https://www.pgadmin.org/) and install it.
+The _docker-compose.yaml_ file contains a pgAdmin container additionally.
 
-Make a new server connection `localhost` with port `5432` and username `postgres` and password `mysecretpassword`.
+Open the browser on your host machine (your local machine) and visit [http://localhost:5050](http://localhost:5050). Use the email `user@example.com` with the password `123456` to login to pgAdmin
+
+Make a new server connection `postgres` with port `5432` and username `postgres` and password `mysecretpassword`.
 
 Name the connection `Curious-Moon-Enceladus`.
 
@@ -88,9 +102,9 @@ Name the connection `Curious-Moon-Enceladus`.
 
 Open a *Bash* on the *Docker* container.
 
-`psql -U postgres` to open the Postgres shell (PSQL) for the user `postgres`.
+`psql -U postgres` to open the Postgres shell (PSQL) for the user `postgres` to type SQL commands directly.
 
-`create database enceladus;` to create a database if it is not there yet (e.g. if it was dropped before)
+E.g. `create database enceladus;` to create a database if it is not there yet (e.g. if it was dropped before)
 
 Type `\q` to exit Postgres shell (PSQL).
 
