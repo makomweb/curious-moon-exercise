@@ -2,7 +2,9 @@ version: '3'
 
 services:
     database:
-        image: postgres
+        # image: postgres
+        image: makomweb/images:postgres-13.1-with-make-4.2.1
+        container_name: postgres
         environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: mysecretpassword
@@ -11,3 +13,13 @@ services:
           - "5432:5432"
         volumes:
           - //c/Workspace/curious-moon-exercise:/home/curious
+
+    pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=user@example.com
+        - PGADMIN_DEFAULT_PASSWORD=123456
+        - PGADMIN_LISTEN_PORT=5050
+      ports:
+        - "5050:5050"
