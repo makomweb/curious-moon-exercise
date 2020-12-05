@@ -1,6 +1,6 @@
 # My notes about: A Curious Moon by Rob Conery
 
-This repository contains the implementation I did while reading the book -- every SQL query as well as a description **how to setup everything on Windows 10 using Docker**.
+This repository contains the implementation I did while reading the book. All SQL queries as well as a description **how to setup everything on Windows 10 using Docker** are also part of this repository.
 
 A Curious Moon by Rob Conery.
 
@@ -9,15 +9,18 @@ A Curious Moon by Rob Conery.
 - Website: [https://bigmachine.io/products/a-curious-moon/](https://bigmachine.io/products/a-curious-moon/)
 - Github: [https://github.com/red-4/curious-moon](https://github.com/red-4/curious-moon)
 
+---
+
 ## Quickstart
 
-1. `docker-compose up -d` to download the Docker images and start the containers
-2. `docker exec -it postgres bash` to open a Bash on the Postgres container
-3. `cd /home/curious` to browse the mounted directory with the make file and raw CSV data
-4. `make import_master_plan` to import the master plan data into the _enceladus_ database
-5. `localhost:5050` to open a pgAdmin window on the Docker host machine (your local machine)
-6. login with `user@example.com` and `123456` to login to the pgAdmin
-7. create a server connection to the Postgres server using `postgres:5432` and `user@example.com` with `mysecretpassword` to browse the _enceladus_ database
+1. use the alternative _Docker_ image from _makomweb_ by uncommenting the respective part in the _docker-compose.yaml_ file
+2. `docker-compose up -d` to download the Docker images and start the containers
+3. `docker exec -it postgres bash` to open a _Bash_ on the _Postgres_ container
+4. `cd /home/curious` to browse the mounted directory with the make file and raw CSV data
+5. `make import_master_plan` to import the master plan data into the _enceladus_ database
+6. `localhost:5050` to open a _pgAdmin_ window on the _Docker_ host machine (your local machine)
+7. login with `user@example.com` and `123456` to login to the _pgAdmin_
+8. create a server connection to the _Postgres_ server using `postgres:5432` and `user@example.com` with `mysecretpassword` to browse the _enceladus_ database
 
 ---
 
@@ -27,11 +30,11 @@ I have used Docker for Windows: [https://docs.docker.com/docker-for-windows/inst
 
 ### Using Docker Compose ...
 
-To work with the Docker image I have created a *docker-compose.yaml* file. 
-Visiting this file you will notice that the container port `5432` is mounted to the default Postgres port `5432`.
+To work with the _Docker_ image I have created a *docker-compose.yaml* file. 
+Visiting this file you will notice that the container port `5432` is mounted to the default _Postgres_ port `5432`.
 You will also notice the credentials how to access the database - e.g. with [pgAdmin](https://www.pgadmin.org/).
-The configuration file mounts a directory `c:\Workspace\curious-moon-exercise` into the container.
-This way you can edit files using the familiar editing tools - e.g. Visual Studio Code and Git.
+The configuration file mounts a directory `c:\Workspace\curious-moon-exercise` into the container. This is also where I keep this git-Repo locally.
+This way you can edit files using the familiar editing tools - e.g. _Visual Studio Code_ and _Git_.
 Feel free to adjust the configuration to your needs.
 
 Run `docker-compose up -d` to start the container in the background. 
@@ -43,8 +46,6 @@ Pull the [Postgres Docker image](https://hub.docker.com/_/postgres).
 I decided to use a shared folder (between the Windows Host and the Docker container) to store the implementation files.
 
 `docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
-
-The advantage is that I can use VSCode and the Git tools I am familiar with - without additional installation steps - because they are already on my machine.
 
 If you want to run the Docker container without the mounted folder you can use the following command:
 
