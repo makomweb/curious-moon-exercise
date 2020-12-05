@@ -11,7 +11,7 @@ A Curious Moon by Rob Conery.
 
 ---
 
-## Quickstart
+## [Quickstart](./quickstart.md)
 
 1. use the alternative _Docker_ image from _makomweb_ by uncommenting the respective part in the _docker-compose.yaml_ file
 2. `docker-compose up -d` to download the Docker images and start the containers
