@@ -45,7 +45,7 @@ Pull the [Postgres Docker image](https://hub.docker.com/_/postgres).
 
 I decided to use a shared folder (between the Windows Host and the Docker container) to store the implementation files.
 
-`docker run --volume //c/Workspace/curious-moon-exercise:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
+`docker run --volume .:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
 
 If you want to run the Docker container without the mounted folder you can use the following command:
 

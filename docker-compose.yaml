@@ -12,7 +12,7 @@ services:
         ports:
           - "5432:5432"
         volumes:
-          - //c/Workspace/curious-moon-exercise:/home/curious
+          - .:/home/curious
 
     pgadmin:
       image: dpage/pgadmin4
