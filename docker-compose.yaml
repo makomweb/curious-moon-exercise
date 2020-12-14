@@ -2,8 +2,8 @@ version: '3'
 
 services:
     database:
-        image: postgres
-        #image: makomweb/images:postgres-13.1-with-make-4.2.1
+        #image: postgres
+        image: makomweb/images:postgres-13.1-with-make-4.2.1
         container_name: postgres
         environment:
             POSTGRES_USER: postgres
@@ -13,6 +13,7 @@ services:
           - "5432:5432"
         volumes:
           - .:/home/curious
+          - ./postgres-data:/var/lib/postgresql/data
 
     pgadmin:
       image: dpage/pgadmin4
