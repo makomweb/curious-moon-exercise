@@ -2,9 +2,9 @@ version: '3'
 
 services:
     database:
+      container_name: postgres
       #image: postgres
       image: makomweb/images:postgres-13.1-with-make-4.2.1
-      container_name: postgres
       env_file:
         - ./.env
       ports:
@@ -14,8 +14,8 @@ services:
         - ./postgres-data:/var/lib/postgresql/data
 
     pgadmin:
-      image: dpage/pgadmin4
       container_name: pgadmin
+      image: dpage/pgadmin4
       env_file:
         - ./.env
       ports:
