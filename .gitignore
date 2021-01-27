@@ -1,3 +1,5 @@
 /build.sql
 /data/*
 /postgres-data/*
+
+/curious/data/*

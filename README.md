@@ -23,71 +23,6 @@ A Curious Moon by Rob Conery.
 7. login with `user@example.com` and `123456` to login to the _pgAdmin_
 8. create a server connection to the _Postgres_ server using `curious_db:5432` and `user@example.com` with `mysecretpassword` to browse the _enceladus_ database
 
----
-
-## Docker preparation
-
-I have used Docker for Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/).
-
-### Using Docker Compose ...
-
-To work with the _Docker_ image I have created a *docker-compose.yaml* file. 
-Visiting this file you will notice that the container port `5432` is mounted to the default _Postgres_ port `5432`.
-You will also notice the credentials how to access the database - e.g. with [pgAdmin](https://www.pgadmin.org/).
-The configuration file mounts a directory `c:\Workspace\curious-moon-exercise` into the container. This is also where I keep this git-Repo locally.
-This way you can edit files using the familiar editing tools - e.g. _Visual Studio Code_ and _Git_.
-Feel free to adjust the configuration to your needs.
-
-Run `docker-compose up -d` to start the container in the background. 
-
-### ... or run Docker manually
-
-Pull the [Postgres Docker image](https://hub.docker.com/_/postgres).
-
-I decided to use a shared folder (between the Windows Host and the Docker container) to store the implementation files.
-
-`docker run --volume ./curious:/home/curious -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
-
-If you want to run the Docker container without the mounted folder you can use the following command:
-
-`docker run -d -p 5432:5432 --name curious-moon-exercise -e POSTGRES_PASSWORD=mysecretpassword postgres`
-
-### Alternative Docker image
-
-Alternatively you can use the *Docker* image which combines **PostgreSQL 13.1** and **GNU Make 4.2.1**.
-
-[https://registry.hub.docker.com/r/makomweb/images/tags](https://registry.hub.docker.com/r/makomweb/images/tags)
-
-Replace the official *Postgres* image in your `docker-compose.yaml` file:
-
-~~~yaml
-#image: postgres
-image: makomweb/images:postgres-13.1-with-make-4.2.1
-~~~
-
-After that run `docker-compose up -d` to download the image and start the container.
-
-## Starting a Bash on the Docker container
-
-Once the Postgres database is running you can start with the exercise.
-
-`docker exec -it postgres bash` opens a _Bash_ on the container.
-Make sure you use the correct container name here.
-
-### Install Make on the container
-
-We will need *Make* to do the exercise.
-
-~~~
-Note:
-If you are running the alternative Docker image it is not necessary to install *Make*.
-It already comes with it preinstalled.
-~~~
-
-`apt-get update -y` to update the *APT* catalogs.
-
-`apt-get install -y make` to install _Make_.
-
 ## Get the Cassini RAW data
 
 Download the raw data from [http://archive.redfour.io/cassini/cassini_data.zip](http://archive.redfour.io/cassini/cassini_data.zip). To begin with I am only interested in the `master_plan.csv` file. The other files `cda.csv`, `inms.csv`, `jpl_flybys.csv`, and `chem_data.csv` will also be necessary later.
@@ -98,7 +33,7 @@ The _docker-compose.yaml_ file contains a pgAdmin container additionally.
 
 Open the browser on your host machine (your local machine) and visit [http://localhost:5050](http://localhost:5050). Use the email `user@example.com` with the password `123456` to login to pgAdmin
 
-Make a new server connection `postgres` with port `5432` and username `postgres` and password `mysecretpassword`.
+Make a new server connection `curious_db` with port `5432` and username `postgres` and password `mysecretpassword`.
 
 Name the connection `Curious-Moon-Enceladus`.
 
